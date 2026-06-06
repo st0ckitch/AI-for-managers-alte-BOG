@@ -2953,7 +2953,11 @@ window.DEFAULT_SLIDES = [
   };
   window.resetSlides = function () { localStorage.removeItem(KEY); };
   window.hasEdits = function () { return !!localStorage.getItem(KEY); };
-  window.SLIDES = window.loadSlides();
+  // Public deck ALWAYS shows the committed slides.js. A localStorage draft is
+  // used only inside the admin preview (index.html?preview), so a saved draft
+  // can never hide the published content from viewers.
+  var isPreview = /[?&]preview(=|&|$)/.test(window.location.search);
+  window.SLIDES = isPreview ? window.loadSlides() : window.DEFAULT_SLIDES;
 })();
 
 </script>

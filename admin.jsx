@@ -121,7 +121,7 @@ function Admin() {
   const save = () => {
     window.saveSlides(data); setDirty(false);
     const f = iframeRef.current;
-    if (f) { f.src = "index.html#" + (sel + 1); }
+    if (f) { f.src = "index.html?preview#" + (sel + 1); }
     toast("შენახულია ✓");
   };
 
@@ -166,7 +166,7 @@ function Admin() {
   const reset = () => {
     if (!confirm("საწყის (ნაგულისხმევ) კონტენტს დავუბრუნდეთ? შენახული ცვლილებები წაიშლება.")) return;
     window.resetSlides(); dataRef.current = clone(window.DEFAULT_SLIDES); setSel(0); setDirty(false); force();
-    const f = iframeRef.current; if (f) f.src = "index.html#1";
+    const f = iframeRef.current; if (f) f.src = "index.html?preview#1";
     toast("დაბრუნდა საწყისზე");
   };
 
@@ -222,7 +222,7 @@ function Admin() {
         {/* preview */}
         <div className="preview-pane">
           <div className="phead">ცოცხალი გადახედვა · ბოლო შენახული ვერსია</div>
-          <iframe ref={iframeRef} src={"index.html#" + (sel + 1)} title="preview" />
+          <iframe ref={iframeRef} src={"index.html?preview#" + (sel + 1)} title="preview" />
         </div>
       </div>
     </>
