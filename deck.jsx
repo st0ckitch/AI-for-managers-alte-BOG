@@ -343,6 +343,7 @@ function Model({ s }) {
         <ColCard col={{ title: "ძლიერი მხარეები", accent: true, list: s.strengths }} />
         <ColCard col={{ title: "რას მივაქციოთ ყურადღება", list: s.cautions }} />
       </div>
+      {s.note && <div className="note-line r" style={{ "--d": ".4s" }}>{s.note}</div>}
     </div>
   );
 }
