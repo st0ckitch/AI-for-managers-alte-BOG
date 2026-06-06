@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>კონტენტის რედაქტორი · AI მენეჯერებისთვის</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+@font-face { font-family:'FiraGO'; font-weight:400; font-style:normal; font-display:swap; src:url('fonts/FiraGO-Regular.woff2') format('woff2'); }
+@font-face { font-family:'FiraGO'; font-weight:500; font-style:normal; font-display:swap; src:url('fonts/FiraGO-Medium.woff2') format('woff2'); }
+@font-face { font-family:'FiraGO'; font-weight:600; font-style:normal; font-display:swap; src:url('fonts/FiraGO-SemiBold.woff2') format('woff2'); }
+@font-face { font-family:'FiraGO'; font-weight:700; font-style:normal; font-display:swap; src:url('fonts/FiraGO-Bold.woff2') format('woff2'); }
+
+:root {
+  --bg:#F4F4F2; --panel:#FFFFFF; --ink:#0A0B0E; --dim:#55585F; --faint:#8C8F96;
+  --line:rgba(10,11,14,.12); --line2:rgba(10,11,14,.20);
+  --bog:#FF5200; --bog-deep:#D8400A; --bog-soft:rgba(255,82,0,.10);
+  --font:'FiraGO','Noto Sans Georgian',sans-serif;
+  --radius:12px;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { height:100%; }
+body { font-family:var(--font); background:var(--bg); color:var(--ink); font-size:14px; }
+button { font:inherit; cursor:pointer; }
+input,textarea { font-family:var(--font); }
+
+/* ---- top bar ---- */
+.bar {
+  height:60px; display:flex; align-items:center; gap:16px; padding:0 20px;
+  background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;
+}
+.bar .brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; }
+.bar .brand .dot { width:9px; height:9px; border-radius:99px; background:var(--bog); box-shadow:0 0 10px rgba(255,82,0,.5); }
+.bar .brand small { color:var(--faint); font-weight:400; }
+.bar .spacer { flex:1; }
+.btn {
+  border:1px solid var(--line2); background:#fff; color:var(--ink); padding:9px 14px; border-radius:10px;
+  display:inline-flex; align-items:center; gap:8px; transition:all .15s ease; white-space:nowrap; font-size:13px;
+}
+.btn:hover { border-color:var(--bog); color:var(--bog-deep); }
+.btn.primary { background:var(--bog); border-color:var(--bog); color:#fff; }
+.btn.primary:hover { background:var(--bog-deep); color:#fff; }
+.btn.ghost { border-color:transparent; }
+.btn:disabled { opacity:.45; cursor:default; }
+.dirty-dot { width:8px; height:8px; border-radius:99px; background:var(--bog); display:inline-block; }
+
+/* ---- layout ---- */
+.wrap { display:grid; grid-template-columns:300px 1fr 42%; height:calc(100vh - 60px); }
+@media (max-width:1100px){ .wrap{ grid-template-columns:260px 1fr; } .preview-pane{ display:none; } }
+
+/* sidebar */
+.side { border-right:1px solid var(--line); overflow:auto; background:var(--panel); }
+.side .search { position:sticky; top:0; background:var(--panel); padding:12px; border-bottom:1px solid var(--line); }
+.side .search input { width:100%; padding:9px 12px; border:1px solid var(--line2); border-radius:9px; outline:none; }
+.side .search input:focus { border-color:var(--bog); }
+.slide-row {
+  display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-bottom:1px solid var(--line);
+  cursor:pointer; transition:background .12s ease;
+}
+.slide-row:hover { background:var(--bog-soft); }
+.slide-row.active { background:var(--bog-soft); box-shadow:inset 3px 0 0 var(--bog); }
+.slide-row .idx { font-size:11px; color:var(--faint); min-width:22px; font-variant-numeric:tabular-nums; padding-top:1px; }
+.slide-row .meta { min-width:0; }
+.slide-row .st { font-weight:500; font-size:13px; line-height:1.25; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.slide-row .kind { font-size:10.5px; color:var(--faint); margin-top:2px; }
+
+/* editor */
+.editor { overflow:auto; padding:22px 26px 80px; }
+.editor h2 { font-size:20px; font-weight:600; }
+.editor .sub { color:var(--faint); font-size:12.5px; margin-top:3px; margin-bottom:20px; }
+.group { border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px; margin-bottom:14px; background:var(--panel); }
+.group > .glabel { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--bog-deep); font-weight:600; margin-bottom:10px; }
+.subgroup { border-left:2px solid var(--line2); padding:4px 0 4px 14px; margin:10px 0; }
+.subgroup > .glabel { font-size:11.5px; color:var(--dim); font-weight:600; margin-bottom:8px; }
+.field { margin-bottom:12px; }
+.field:last-child { margin-bottom:0; }
+.field label { display:block; font-size:11.5px; color:var(--dim); margin-bottom:5px; }
+.field textarea, .field input {
+  width:100%; border:1px solid var(--line2); border-radius:9px; padding:9px 11px; font-size:13.5px;
+  color:var(--ink); background:#fff; outline:none; resize:vertical; line-height:1.45;
+}
+.field textarea:focus, .field input:focus { border-color:var(--bog); box-shadow:0 0 0 3px var(--bog-soft); }
+.field input[type=number] { width:120px; }
+
+/* preview */
+.preview-pane { border-left:1px solid var(--line); display:flex; flex-direction:column; background:#000; }
+.preview-pane .phead { height:42px; display:flex; align-items:center; gap:10px; padding:0 14px; background:var(--panel); border-bottom:1px solid var(--line); font-size:12px; color:var(--dim); }
+.preview-pane iframe { flex:1; width:100%; border:0; background:var(--bg); }
+
+/* toast */
+.toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0;
+  background:var(--ink); color:#fff; padding:11px 20px; border-radius:99px; font-size:13px; z-index:200;
+  transition:all .25s ease; pointer-events:none; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+.help { font-size:12px; color:var(--dim); background:var(--bog-soft); border:1px solid rgba(255,82,0,.25);
+  border-radius:10px; padding:11px 13px; margin-bottom:18px; line-height:1.5; }
+.help b { color:var(--bog-deep); }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<input type="file" id="importer" accept=".js,.json" style="display:none" />
+<div class="toast" id="toast"></div>
+
+<script src="slides.js"></script>
+<script src="store.js"></script>
+<script type="text/babel" data-presets="react" src="admin.jsx"></script>
+</body>
+</html>
