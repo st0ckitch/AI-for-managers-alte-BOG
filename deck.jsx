@@ -595,7 +595,29 @@ function Thanks({ s }) {
   );
 }
 
-const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks };
+function Video({ s }) {
+  const src = s.src || "";
+  const embeddable = /youtube\.com|youtu\.be|vimeo\.com|drive\.google\.com\/file\/.*\/preview|player\.|\/embed\//.test(src);
+  return (
+    <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
+      <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
+      <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div className="video-frame r" style={{ "--d": ".12s" }}>
+          {embeddable
+            ? <iframe src={src} allow="autoplay; encrypted-media; fullscreen" allowFullScreen title="video" />
+            : <a className="video-ph" href={src} target="_blank" rel="noreferrer">
+                <span className="vplay">▶</span>
+                <span className="vcap">{s.caption || "ვიდეო - დემონსტრაცია"}</span>
+                <span className="vlink">{s.linkLabel || "ვიდეოს გახსნა ↗"}</span>
+              </a>}
+        </div>
+        {s.note && <div className="note-line r" style={{ "--d": ".3s" }}>{s.note}</div>}
+      </div>
+    </div>
+  );
+}
+
+const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks, video: Video };
 
 function Slide({ s, idx }) {
   const Body = KINDS[s.kind] || Points;
