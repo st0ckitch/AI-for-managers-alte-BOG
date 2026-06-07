@@ -2080,7 +2080,7 @@ window.DEFAULT_SLIDES = [
     "title": "აგენტის ცოცხალი დემონსტრაცია",
     "titleSize": "md",
     "caption": "აგენტის მუშაობის ვიდეო-დემონსტრაცია",
-    "src": "https://drive.google.com/drive/search?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto&q=type:video",
+    "src": "https://drive.google.com/file/d/1TQ4KdHEwZu3L18DgUntGE7XhjDLS2_aY/preview",
     "linkLabel": "ვიდეოს გახსნა ↗",
     "note": "ვიდეო გვიჩვენებს, როგორ ასრულებს აგენტი დავალებას თავიდან ბოლომდე.",
     "foot": "2.3 პოპულარული AI-პლატფორმები"
