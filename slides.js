@@ -22,7 +22,7 @@ window.DEFAULT_SLIDES = [
   {
     "kind": "trainer",
     "eyebrow": "ᲨᲔᲡᲐᲕᲐᲚᲘ",
-    "title": "ტტრენერი",
+    "title": "ტრენერი",
     "name": "არტემ ანანოვი",
     "role": "Digital Marketing Lead · AI ტრენერი",
     "desc": "Data-driven მარკეტერი, ათწლიანი გამოცდილება მარკეტინგსა და პროდუქტების მართვაში.",
