@@ -617,7 +617,61 @@ function Video({ s }) {
   );
 }
 
-const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks, video: Video };
+/* ---- Turing test visual ---- */
+function Turing({ s }) {
+  const Player = ({ p }) => (
+    <div className="t-player r" style={{ "--d": p.d }}>
+      <div className="t-head"><span className="t-tag">{p.tag}</span><span className="t-q">?</span></div>
+      <div className="t-bubble">{p.msg}</div>
+      <div className="t-reveal">{p.who}</div>
+    </div>
+  );
+  return (
+    <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
+      <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
+      <div className="turing">
+        <Player p={{ ...s.a, d: ".18s" }} />
+        <div className="t-judge r" style={{ "--d": ".26s" }}>
+          <div className="t-judge-badge">{s.judge || "მსაჯი"}</div>
+          <div className="t-judge-q">{s.judgeQ}</div>
+          <div className="t-vs">?</div>
+          <div className="t-verdict">{s.verdict}</div>
+        </div>
+        <Player p={{ ...s.b, d: ".34s" }} />
+      </div>
+    </div>
+  );
+}
+
+/* ---- process / architecture flow diagram ---- */
+function Flow({ s }) {
+  const Box = ({ b }) => (
+    <div className={"flow-box" + (b.accent ? " accent" : "")}>
+      <div className="fh">{b.h}</div>
+      {b.b && <div className="fb">{b.b}</div>}
+    </div>
+  );
+  return (
+    <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
+      <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
+      <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div className="flow">
+          {s.stages.map((st, i) => (
+            <React.Fragment key={i}>
+              <div className="flow-stage r" style={{ "--d": (0.16 + i * 0.1) + "s" }}>
+                {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
+              </div>
+              {i < s.stages.length - 1 && <div className="flow-arrow r" style={{ "--d": (0.2 + i * 0.1) + "s" }}>→</div>}
+            </React.Fragment>
+          ))}
+        </div>
+        {s.result && <div className="note-line r" style={{ "--d": ".5s" }}>{s.result}</div>}
+      </div>
+    </div>
+  );
+}
+
+const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks, video: Video, turing: Turing, flow: Flow };
 
 function Slide({ s, idx }) {
   const Body = KINDS[s.kind] || Points;

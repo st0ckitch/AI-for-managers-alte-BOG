@@ -502,6 +502,38 @@ body::before {
 /* helper: two-column point list inside a single card area */
 .split2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 26px; }
 
+/* ---------- TURING TEST ---------- */
+.turing { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 0.85fr 1fr; gap: 24px; align-items: center; }
+.t-player { padding: 22px 24px; border-radius: 18px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-3)); position: relative; overflow: hidden; }
+.t-player::after { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: var(--grad); }
+.t-head { display: flex; align-items: center; justify-content: space-between; }
+.t-tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.t-q { width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; font-weight: 700;
+  background: var(--accent-soft); color: var(--accent-text); }
+.t-bubble { margin-top: 16px; padding: 15px 18px; border-radius: 14px 14px 14px 4px; background: var(--glass-hi);
+  border: 1px solid var(--line); font-size: 16px; color: var(--ink); line-height: 1.45; }
+.t-reveal { margin-top: 14px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.t-judge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.t-judge-badge { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-text); padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,82,0,0.3); background: var(--accent-soft); }
+.t-judge-q { font-family: var(--font-serif); font-style: italic; font-size: 19px; color: var(--ink); max-width: 22ch; line-height: 1.3; }
+.t-vs { font-family: var(--font-display); font-weight: 700; font-size: 88px; line-height: 1;
+  background: var(--shimmer); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 6s linear infinite; filter: drop-shadow(0 8px 26px rgba(255,82,0,0.3)); }
+.t-verdict { font-size: 15px; color: var(--ink-dim); max-width: 26ch; line-height: 1.45; }
+
+/* ---------- FLOW DIAGRAM ---------- */
+.flow { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.flow-stage { display: flex; flex-direction: column; gap: 12px; flex: 1; max-width: 300px; }
+.flow-box { padding: 18px 18px; border-radius: 14px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-3)); position: relative; }
+.flow-box.accent { border-color: rgba(255,82,0,0.4); background: var(--grad-soft); }
+.flow-box .fh { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
+.flow-box.accent .fh { color: var(--bog-light); }
+.flow-box .fb { font-size: 12.5px; color: var(--ink-dim); margin-top: 6px; line-height: 1.4; }
+.flow-arrow { font-size: 30px; color: var(--accent); flex: none; filter: drop-shadow(0 0 8px var(--accent-glow)); }
+
 /* ---------- VIDEO ---------- */
 .video-frame {
   position: relative; width: 100%; max-width: 920px; margin: 0 auto; aspect-ratio: 16 / 9;
@@ -552,7 +584,7 @@ body::before {
 <div id="root"></div>
 <script>
 /* global window */
-// AI მენეჯერებისთვის - კონტენტი (85 სლაიდი). რედაქტირდება admin.html-იდან.
+// AI მენეჯერებისთვის - კონტენტი. რედაქტირდება admin.html-იდან.
 window.DEFAULT_SLIDES = [
   {
     "kind": "cover",
@@ -825,6 +857,27 @@ window.DEFAULT_SLIDES = [
         "b": "გენერაციული AI მასობრივი და ხელმისაწვდომი ხდება ყველასთვის."
       }
     ],
+    "foot": "1.1 რა არის AI?"
+  },
+  {
+    "kind": "turing",
+    "eyebrow": "1.1 · ᲢᲘᲣᲠᲘᲜᲒᲘᲡ ᲢᲔᲡᲢᲘ",
+    "title": "ტიურინგის ტესტი",
+    "titleSize": "md",
+    "intro": "1950 წელი. ადამიანი წერილობით ესაუბრება ორ თანამოსაუბრეს - ერთი ცოცხალი ადამიანია, მეორე მანქანა. თუ მსაჯი ვერ არჩევს რომელია მანქანა, მაშინ მანქანამ ტესტი ჩააბარა.",
+    "judge": "მსაჯი",
+    "judgeQ": "„რა იგრძენი, როცა ბოლოს ზღვა ნახე?“",
+    "a": {
+      "tag": "მოთამაშე A",
+      "who": "სინამდვილეში: ადამიანი",
+      "msg": "სიმშვიდე და თავისუფლება - თითქოს დრო შენელდა."
+    },
+    "b": {
+      "tag": "მოთამაშე B",
+      "who": "სინამდვილეში: მანქანა",
+      "msg": "სიმშვიდე და თავისუფლება - თითქოს დრო შენელდა."
+    },
+    "verdict": "მსაჯი: ვერ ვარჩევ რომელია მანქანა.",
     "foot": "1.1 რა არის AI?"
   },
   {
@@ -1806,34 +1859,6 @@ window.DEFAULT_SLIDES = [
     "foot": "1.7 ცოცხალი დემონსტრაცია"
   },
   {
-    "kind": "points",
-    "eyebrow": "1.7 · ᲞᲠᲝᲛᲤᲗᲘᲜᲒᲘ",
-    "title": "კარგი პრომფთის ანატომია",
-    "titleSize": "md",
-    "intro": "რაც უფრო ნათელია შეკითხვა, მით უკეთესია პასუხი. კარგი პრომფთი ჩვეულებრივ ოთხ ნაწილს შეიცავს:",
-    "cols": 4,
-    "numbered": true,
-    "items": [
-      {
-        "h": "როლი",
-        "b": "„წარმოიდგინე, რომ ხარ გამოცდილი ფინანსური ანალიტიკოსი…“"
-      },
-      {
-        "h": "კონტექსტი",
-        "b": "„ეს არის ბანკის მომხმარებლის 2 წლიანი საბანკო ამონაწერი. “"
-      },
-      {
-        "h": "ამოცანა",
-        "b": "„გაანალიზე ეს საბანკო ამონაწერი და შეაფასე 20,000 ლარის ოდენობის სესხის გაცემის რისკი. შეფასების კრიტერიუმები: X, Y, Z...“"
-      },
-      {
-        "h": "ფორმატი",
-        "b": "\"დამიბრუნე რეპორტი PDF ფორმატში\""
-      }
-    ],
-    "foot": "1.7 ცოცხალი დემონსტრაცია"
-  },
-  {
     "kind": "statement",
     "eyebrow": "1.8 · ᲓᲦᲘᲡ ᲑᲝᲚᲝᲡ",
     "title": "კითხვა-პასუხის სესია",
@@ -1886,6 +1911,34 @@ window.DEFAULT_SLIDES = [
     "foot": "შეხვედრა 2"
   },
   {
+    "kind": "points",
+    "eyebrow": "2 · ᲞᲠᲝᲛᲤᲗᲘᲜᲒᲘ",
+    "title": "კარგი პრომფთის ანატომია",
+    "titleSize": "md",
+    "intro": "რაც უფრო ნათელია შეკითხვა, მით უკეთესია პასუხი. კარგი პრომფთი ჩვეულებრივ ოთხ ნაწილს შეიცავს:",
+    "cols": 4,
+    "numbered": true,
+    "items": [
+      {
+        "h": "როლი",
+        "b": "„წარმოიდგინე, რომ ხარ გამოცდილი ფინანსური ანალიტიკოსი…“"
+      },
+      {
+        "h": "კონტექსტი",
+        "b": "„ეს არის ბანკის მომხმარებლის 2 წლიანი საბანკო ამონაწერი. “"
+      },
+      {
+        "h": "ამოცანა",
+        "b": "„გაანალიზე ეს საბანკო ამონაწერი და შეაფასე 20,000 ლარის ოდენობის სესხის გაცემის რისკი. შეფასების კრიტერიუმები: X, Y, Z...“"
+      },
+      {
+        "h": "ფორმატი",
+        "b": "\"დამიბრუნე რეპორტი PDF ფორმატში\""
+      }
+    ],
+    "foot": "შეხვედრა 2"
+  },
+  {
     "kind": "block",
     "num": "2.1",
     "titleLines": [
@@ -1893,104 +1946,11 @@ window.DEFAULT_SLIDES = [
       "ინდუსტრიაში"
     ],
     "items": [
-      "FinTech ევოლუცია, ჩატბოტები, პერსონალიზაცია",
-      "უსაფრთხოება: Fraud detection, AML მონიტორინგი",
-      "Credit Scoring და საოპერაციო ავტომატიზაცია",
-      "KYC, დოკუმენტები; Churn, CLV, კამპანიები"
+      "AI საბანკო სფეროში - ზოგადი სურათი",
+      "მომავლის სცენარი: ზარების ავტომატიზაცია",
+      "ქეისი: Revolut - ფინტექის სტრატეგია",
+      "მარკეტინგი: Churn, CLV და კამპანიები"
     ],
-    "foot": "2.1 AI საბანკო ინდუსტრიაში"
-  },
-  {
-    "kind": "stepper",
-    "eyebrow": "2.1 · FINTECH",
-    "title": "FinTech-ის ევოლუცია და AI-ის როლი",
-    "titleSize": "md",
-    "nodes": [
-      {
-        "dot": "1",
-        "tag": "ფაზა 1",
-        "h": "ციფრული ბანკინგი",
-        "b": "ონლაინ და მობილური მომსახურება - ბანკის ფილიალი ჯიბეში."
-      },
-      {
-        "dot": "2",
-        "tag": "ფაზა 2",
-        "h": "ავტომატიზაცია",
-        "b": "განმეორებადი პროცესების ავტომატიზაცია."
-      },
-      {
-        "dot": "3",
-        "tag": "ფაზა 3",
-        "h": "მონაცემები / ანალიტიკა",
-        "b": "Big Data - გადაწყვეტილებები რეალურ მონაცემებზე დაყრდნობით."
-      },
-      {
-        "dot": "4",
-        "tag": "ფაზა 4",
-        "h": "AI-ით მართული",
-        "b": "პროგნოზი, პერსონალიზაცია, ავტონომიური პროცესები."
-      }
-    ],
-    "foot": "2.1 AI საბანკო ინდუსტრიაში"
-  },
-  {
-    "kind": "points",
-    "eyebrow": "2.1 · ᲒᲐᲛᲝᲧᲔᲜᲔᲑᲐ",
-    "title": "AI საბანკო სფეროში: ხუთი მიმართულება",
-    "titleSize": "md",
-    "cols": 5,
-    "dense": true,
-    "items": [
-      {
-        "h": "კომუნიკაცია",
-        "b": "ჩატბოტები, ვირტუალური ასისტენტები, პერსონალიზებული შეთავაზებები (მაგალთები)"
-      },
-      {
-        "h": "უსაფრთხოება",
-        "b": "Fraud detection, AML მონიტორინგი - რეალურ დროში"
-      },
-      {
-        "h": "საკრედიტო რისკი",
-        "b": "Credit Scoring - უფრო ზუსტი და სწრაფი შეფასება"
-      },
-      {
-        "h": "ოპერირება",
-        "b": "რუტინის ავტომატიზაცია, KYC და დოკუმენტების დამუშავება"
-      },
-      {
-        "h": "მარკეტინგი",
-        "b": "Churn, CLV პროგნოზი, პერსონალიზებული კამპანიები"
-      }
-    ],
-    "note": "შემდეგ სლაიდებზე თითოეულ მიმართულებას დეტალურად განვიხილავთ.",
-    "foot": "2.1 AI საბანკო ინდუსტრიაში"
-  },
-  {
-    "kind": "points",
-    "eyebrow": "2.1 · ᲙᲝᲛᲣᲜᲘᲙᲐᲪᲘᲐ",
-    "title": "ჭკვიანი ჩატბოტები და პერსონალიზაცია",
-    "titleSize": "md",
-    "cols": 4,
-    "dense": true,
-    "items": [
-      {
-        "h": "ჭკვიანი ჩატბოტები",
-        "b": "24/7 პასუხობს კლიენტის შეკითხვებს ბუნებრივ ენაზე: ბალანსი, გადარიცხვა, პროდუქტები, ზოგადი კითხვები"
-      },
-      {
-        "h": "ვირტუალური ასისტენტები",
-        "b": "კლიენტს ეხმარება ნავიგაციაში, ავსებს განცხადებებს, წარმართავს პროცესს."
-      },
-      {
-        "h": "პერსონალიზებული შეთავაზებები",
-        "b": "კლიენტის ქცევაზე დაყრდნობით სთავაზობს სწორ პროდუქტს სწორ დროს."
-      },
-      {
-        "h": "ადამიანზე გადართვა",
-        "b": "რთულ ქეისებში AI კონტექსტთან ერთად გადასცემს ინფორმაციას თანამშრომელს."
-      }
-    ],
-    "note": "შედეგი: მომსახურების ხარჯი მცირდება, კლიენტის კმაყოფილება იზრდება.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
@@ -2017,31 +1977,6 @@ window.DEFAULT_SLIDES = [
       "val": "150+50",
       "u": "",
       "sub": "პირობითად, 200 ოპერატორის ნაცვლად: 150 AI-აგენტი და 50 ადამიანი რთული ქეისებისთვის."
-    },
-    "foot": "2.1 AI საბანკო ინდუსტრიაში"
-  },
-  {
-    "kind": "twocol",
-    "eyebrow": "2.1 · ᲡᲐᲙᲠᲔᲓᲘᲢᲝ ᲡᲙᲝᲠᲘᲜᲒᲘ",
-    "title": "კრედიტ სქორინგი: ML დღეს, AI ხვალ",
-    "titleSize": "md",
-    "intro": "მსგავსი ავტომატიზაცია უკვე ნაწილობრივ შესაძლებელია - კარგი მაგალითია საკრედიტო სქორინგი.",
-    "left": {
-      "title": "დღეს: ML",
-      "list": [
-        "მონიტორინგს აკეთებს ML და არა სრულფასოვანი AI.",
-        "მანქანა აანალიზებს მხოლოდ შეზღუდული ფაქტორების ერთობლიობას.",
-        "ბევრი ფაქტორი ანალიზის მიღმა რჩება."
-      ]
-    },
-    "right": {
-      "title": "ხვალ: AI + Open Banking",
-      "accent": true,
-      "list": [
-        "გაანალიზდება სხვა ბანკების ინფორმაციაც.",
-        "გაითვალისწინება ადამიანის social behaviours.",
-        "უფრო სრული და სამართლიანი სურათი თითო კლიენტზე."
-      ]
     },
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
@@ -2073,120 +2008,131 @@ window.DEFAULT_SLIDES = [
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
-    "kind": "steps",
-    "eyebrow": "2.1 · ᲣᲡᲐᲤᲠᲗᲮᲝᲔᲑᲐ",
-    "title": "Fraud Detection - თაღლითობის გამოვლენა",
+    "kind": "flow",
+    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 1",
+    "title": "AI თაღლითობის აღმოჩენა",
     "titleSize": "md",
-    "steps": [
+    "intro": "ML აფასებს თითო ბარათის გადახდას და საეჭვოს აჩერებს, სანამ ფული გავა.",
+    "stages": [
       {
-        "n": "1",
-        "h": "ნორმის შესწავლა",
-        "b": "AI სწავლობს კლიენტის ჩვეულ ქცევას - სად, როდის, რამდენს ხარჯავს."
+        "h": "ბარათით გადახდა",
+        "b": "შემოდის ტრანზაქცია"
       },
       {
-        "n": "2",
-        "h": "ანომალიის აღმოჩენა",
-        "b": "უჩვეულო ტრანზაქცია (სხვა ქვეყანა, დიდი თანხა)."
+        "h": "ML სქორინგი",
+        "b": "ითვლება თაღლითობის ალბათობა თითო გადახდაზე"
       },
       {
-        "n": "3",
-        "h": "რეალურ დროში რეაგირება",
-        "b": "საეჭვო ოპერაცია ჩერდება ან მოწმდება წამებში, არა საათებში."
-      },
-      {
-        "n": "4",
-        "h": "მუდმივი სწავლა",
-        "b": "ახალ თაღლითურ სქემებს ადაპტირდება დროთა განმავლობაში."
+        "branch": [
+          {
+            "h": "საეჭვო → ჩარევის ნაკადი",
+            "b": "გადახდა ჩერდება, მომხმარებელი იღებს გაფრთხილებას და სპეციალისტთან წვდომას",
+            "accent": true
+          },
+          {
+            "h": "სუფთა → დაშვება",
+            "b": "გადახდა ნორმალურად სრულდება"
+          }
+        ]
       }
     ],
-    "stat": {
-      "big": "წამები",
-      "lab": "და არა საათები - რეაგირების დრო საეჭვო ოპერაციაზე"
-    },
-    "note": "Fraud Detection",
+    "result": "შედეგი: საინვესტიციო თაღლითობით გამოწვეული ზარალი 30%-ით შემცირდა.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
-    "kind": "points",
-    "eyebrow": "2.1 · ᲣᲡᲐᲤᲠᲗᲮᲝᲔᲑᲐ",
-    "title": "AML - ფულის გათეთრების წინააღმდეგ",
+    "kind": "flow",
+    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 2",
+    "title": "ზარის რეალურ დროში იდენტიფიკაცია",
     "titleSize": "md",
-    "intro": "AML (Anti-Money Laundering): AI აანალიზებს მილიონობით ტრანზაქციას და პოულობს ისეთ საეჭვო ტენდენციებს, რომელთა ხელით აღმოჩენა შეუძლებელი იქნებოდა.",
-    "cols": 3,
-    "items": [
+    "intro": "2026 წლის ფუნქცია - კონტრზომა AI-ხმით თაღლითობის წინააღმდეგ.",
+    "stages": [
       {
-        "h": "კავშირების ანალიზი",
-        "b": "გამოავლენს დაკავშირებულ ანგარიშებსა და უჩვეულო ფულად ჯაჭვებს."
+        "h": "მომხმარებელი ხსნის აპს",
+        "b": "სატელეფონო ზარის მიმდინარეობისას"
       },
       {
-        "h": "ჭკვიანი ფილტრაცია",
-        "b": "ამცირებს ცრუ განგაშებს - გუნდი ფოკუსირდება რეალურ რისკებზე"
+        "h": "აპი ამოიცნობს ზარს",
+        "b": "ხვდება, რომ მომხმარებელი ახლა ზარშია"
       },
       {
-        "h": "ანგარიშგება",
-        "b": "ავტომატურად ამზადებს რეგულატორისთვის საჭირო დოკუმენტაციას."
+        "branch": [
+          {
+            "h": "დამრეკავი ამბობს „Revolut ვარ“",
+            "b": "აპი აჩვენებს ბანერს: ნამდვილად Revolut-ია თუ არა",
+            "accent": true
+          },
+          {
+            "h": "ნამდვილი ზარი",
+            "b": "ბანერი ადასტურებს, რომ ზარი ნამდვილია"
+          }
+        ]
       }
     ],
+    "result": "შედეგი: პირდაპირი დაცვა AI-ხმით იმიტირებული თაღლითობისგან.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
-    "kind": "twocol",
-    "eyebrow": "2.1 · ᲡᲐᲙᲠᲔᲓᲘᲢᲝ ᲠᲘᲡᲙᲘ",
-    "title": "Credit Scoring ",
+    "kind": "flow",
+    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 3",
+    "title": "ტრანზაქციების მონიტორინგი მასშტაბურად",
     "titleSize": "md",
-    "left": {
-      "title": "ტრადიციული მიდგომა",
-      "list": [
-        "რამდენიმე ფიქსირებული პარამეტრი",
-        "ნელი, ხშირად რუტინული პროცესი",
-        "ზღუდავს მათ, ვისაც მოკლე ისტორია აქვს",
-        "ერთიანი წესი ყველასთვის"
-      ]
-    },
-    "right": {
-      "title": "AI-agent მიდგომა",
-      "accent": true,
-      "list": [
-        "ასობით სიგნალი ერთდროულად, სხვდასხვა წყაროდან",
-        "სწრაფი, თითქმის მყისიერი გადაწყვეტა",
-        "უფრო სამართლიანი - ფართო სურათი",
-        "მორგებადი თითოეულ მომხმარებელზე"
-      ]
-    },
+    "intro": "AI და ადამიანი ერთად - „human-in-the-loop“ იქ, სადაც მსჯელობა საჭიროა.",
+    "stages": [
+      {
+        "h": "ტრანზაქციები",
+        "b": "მილიონობით ოპერაცია რეალურ დროში"
+      },
+      {
+        "h": "AI რისკის შეფასება",
+        "b": "სისტემა ანაწილებს რისკის დონის მიხედვით"
+      },
+      {
+        "branch": [
+          {
+            "h": "დიდი მოცულობა, დაბალი სირთულე → AI",
+            "b": "AI თავად ამუშავებს სკრინინგის შრეს"
+          },
+          {
+            "h": "რთული ქეისი → ადამიანი",
+            "b": "გამომძიებელი იღებს მსჯელობის მომთხოვ შემთხვევებს",
+            "accent": true
+          }
+        ]
+      }
+    ],
+    "result": "Revolut-ის თქმით, AI ფინანსური დანაშაულის აღმოჩენაში უკვე აჯობებს ადამიან-რევიუერებს.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
-    "kind": "points",
-    "eyebrow": "2.1 · ᲝᲞᲔᲠᲘᲠᲔᲑᲐ",
-    "title": "საოპერაციო ავტომატიზაცია და დოკუმენტები",
+    "kind": "flow",
+    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 4",
+    "title": "გენერაციული AI Google Cloud-ით",
     "titleSize": "md",
-    "cols": 3,
-    "items": [
+    "intro": "Revolut-მა Gemini მოდელები ჩართო თაღლითობასა და პროდუქტში.",
+    "stages": [
       {
-        "h": "რუტინული პროცესები",
-        "b": "განმეორებადი დავალებების ავტომატიზაცია - სწრაფად და შეცდომის გარეშე."
+        "h": "Revolut + Google Cloud",
+        "b": "გაფართოებული პარტნიორობა"
       },
       {
-        "h": "მონაცემთა შეყვანა",
-        "b": "ფორმებიდან და დოკუმენტებიდან ინფორმაციის ავტომატური ამოღება."
+        "h": "Gemini მოდელები",
+        "b": "გენერაციული AI ეკოსისტემაში"
       },
       {
-        "h": "ანგარიშების გენერაცია",
-        "b": "რეგულარული რეპორტების ავტომატური მომზადება მონაცემებზე დაყრდნობით."
-      },
-      {
-        "h": "KYC დამუშავება",
-        "b": "კლიენტის იდენტიფიკაცია და დოკუმენტების შემოწმება - სწრაფი onboarding."
-      },
-      {
-        "h": "ხელშეკრულებები",
-        "b": "დოკუმენტებიდან მთავარი პუნქტების ამოღება და შემოწმება/ შეჯამება."
-      },
-      {
-        "h": "დროის დაზოგვა",
-        "b": "თანამშრომელი თავისუფლდება და ფოკუსირდება ღირებულ სამუშაოზე."
+        "branch": [
+          {
+            "h": "თაღლითობის აღმოჩენა",
+            "b": "AI-ით გაძლიერებული დაცვა",
+            "accent": true
+          },
+          {
+            "h": "პროდუქტის განვითარება",
+            "b": "ახალი ფუნქციები და გამოცდილება"
+          }
+        ]
       }
     ],
+    "result": "მიზანი: 100 მილიონი მომხმარებელი.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
@@ -2230,23 +2176,6 @@ window.DEFAULT_SLIDES = [
     "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
   },
   {
-    "kind": "chips",
-    "eyebrow": "2.2 · ᲛᲘᲛᲝᲮᲘᲚᲕᲐ",
-    "title": "AI ყველა ინდუსტრიაში - შვიდი მაგალითი",
-    "titleSize": "lg",
-    "chips": [
-      "მარკეტინგი / გაყიდვები",
-      "მცირე ბიზნესი (SME)",
-      "ჯანდაცვა",
-      "განათლება",
-      "HR",
-      "იურიდიული",
-      "ლოგისტიკა"
-    ],
-    "muted": "და სხვა…",
-    "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
-  },
-  {
     "kind": "points",
     "eyebrow": "2.2 · ᲛᲐᲠᲙᲔᲢᲘᲜᲒᲘ / ᲒᲐᲧᲘᲓᲕᲔᲑᲘ",
     "title": "მარკეტინგი და გაყიდვები",
@@ -2265,29 +2194,6 @@ window.DEFAULT_SLIDES = [
       {
         "h": "A/B ტესტის ანალიზი",
         "b": "რომელი ვარიანტი მუშაობს უკეთ - სწრაფი, მონაცემებზე დაფუძნებული პასუხი."
-      }
-    ],
-    "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
-  },
-  {
-    "kind": "points",
-    "eyebrow": "2.2 · ᲛᲪᲘᲠᲔ ᲑᲘᲖᲜᲔᲡᲘ",
-    "title": "მცირე და საშუალო ბიზნესი (SME)",
-    "titleSize": "md",
-    "intro": "მცირე ბიზნესისთვის AI ერთგვარი „დამატებითი თანამშრომელია“ - დაბალ ფასად, დიდი ეფექტით.",
-    "cols": 3,
-    "items": [
-      {
-        "h": "კლიენტთან კომუნიკაცია",
-        "b": "ავტომატური პასუხები, ჯავშნები, ხშირი შეკითხვების დამუშავება."
-      },
-      {
-        "h": "პროცესების ავტომატიზაცია",
-        "b": "ინვოისები, განრიგი, შემახსენებლები - ხელით შრომის გარეშე."
-      },
-      {
-        "h": "ანალიტიკა",
-        "b": "გაყიდვების და მარაგის მარტივი ანალიზი ბუნებრივ ენაზე."
       }
     ],
     "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
@@ -2344,7 +2250,7 @@ window.DEFAULT_SLIDES = [
     "title": "ადამიანური რესურსები (HR)",
     "titleSize": "md",
     "intro": "HR-ში AI აჩქარებს რუტინას და გუნდს საშუალებას აძლევს, ადამიანებზე იფიქროს.",
-    "cols": 3,
+    "cols": 4,
     "items": [
       {
         "h": "კანდიდატების ვიდეო ინტერვიუები და CV სქრინინგი",
@@ -2357,6 +2263,11 @@ window.DEFAULT_SLIDES = [
       {
         "h": "თანამშრომელთა მხარდაჭერა",
         "b": "ხშირ HR-შეკითხვებზე ავტომატური, სწრაფი პასუხები."
+      },
+      {
+        "h": "HireScreen",
+        "sub": "hire-screen.com",
+        "b": "AI-ვიდეოინტერვიუ: კანდიდატი კითხვებზე ვიდეოთი პასუხობს, AI აფასებს პასუხებსა და CV-ს და ახარისხებს საუკეთესოებს - რეკრუტერი დროს ზოგავს."
       }
     ],
     "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
@@ -2415,9 +2326,9 @@ window.DEFAULT_SLIDES = [
       "AI-პლატფორმები"
     ],
     "items": [
-      "ზოგადი ასისტენტები და ფინანსური ხელსაწყოები",
-      "ოპერაციული (workflow) და ანალიტიკური პლატფორმები",
-      "პრეზენტაციები და დოკუმენტები",
+      "ოპერაციული (workflow) ავტომატიზაცია: n8n",
+      "აგენტური AI და ცოცხალი დემონსტრაცია",
+      "ანალიტიკა, პრეზენტაციები და დოკუმენტები",
       "კონტენტის გენერაცია: სურათი, ვიდეო, ხმა"
     ],
     "foot": "2.3 პოპულარული AI-პლატფორმები"
@@ -2460,74 +2371,6 @@ window.DEFAULT_SLIDES = [
       {
         "h": "ხმა (Voice)",
         "b": "ElevenLabs, OpenAI Voice, Otter.ai"
-      }
-    ],
-    "foot": "2.3 პოპულარული AI-პლატფორმები"
-  },
-  {
-    "kind": "tools",
-    "eyebrow": "2.3 · ᲖᲝᲒᲐᲓᲘ ᲐᲡᲘᲡᲢᲔᲜᲢᲔᲑᲘ",
-    "title": "ზოგადი ასისტენტები",
-    "titleSize": "md",
-    "rows": [
-      {
-        "tn": "ChatGPT",
-        "tv": "OpenAI",
-        "td": "ყველაზე გავრცელებული მოდელი, ამ მომენტზე overhy"
-      },
-      {
-        "tn": "Claude",
-        "tv": "Anthropic",
-        "td": "დიდი დოკუმენტების დამშავება, დეველოპმენტი, UI/UX, ანალიტიკა"
-      },
-      {
-        "tn": "Gemini",
-        "tv": "Google",
-        "td": "ინტეგრაცია Google Workspace-თან"
-      },
-      {
-        "tn": "Perplexity AI",
-        "tv": "Perplexity",
-        "td": "ძიება წყაროების მითითებით - იდეალურია კვლევისთვის"
-      },
-      {
-        "tn": "Microsoft Copilot",
-        "tv": "Microsoft",
-        "td": "ჩაშენებული Office-სა და Windows-ში"
-      }
-    ],
-    "foot": "2.3 პოპულარული AI-პლატფორმები"
-  },
-  {
-    "kind": "tools",
-    "eyebrow": "2.3 · ᲤᲘᲜᲐᲜᲡᲣᲠᲘ / ᲡᲐᲑᲐᲜᲙᲝ",
-    "title": "ფინანსური და საბანკო ხელსაწყოები",
-    "titleSize": "md",
-    "rows": [
-      {
-        "tn": "BloombergGPT",
-        "tv": "Bloomberg",
-        "td": "ფინანსურ ტექსტებზე გაწვრთნილი მოდელი: აანალიზებს ანგარიშებს, ამბებსა და ბაზრის მონაცემებს."
-      },
-      {
-        "tn": "AlphaSense",
-        "tv": "AlphaSense",
-        "td": "AI-ძიება საბაზრო კვლევაში: სწრაფად პოულობს ინსაითებს ათასობით დოკუმენტსა და ანგარიშში."
-      },
-      {
-        "tn": "Kensho",
-        "tv": "S&P Global",
-        "td": "ავტომატიზებს ფინანსურ ანალიტიკასა და მონაცემთა დამუშავებას მკვლევრებისთვის."
-      },
-      {
-        "tn": "Hebbia",
-        "tv": "Hebbia",
-        "td": "კითხვა-პასუხი დიდ დოკუმენტებთან: გუნდი სვამს კითხვას და იღებს ზუსტ ამონარიდს წყაროთი."
-      },
-      {
-        "tn": "Copilot for Finance",
-        "tv": "Microsoft",
-        "td": "AI-დამხმარე Excel-სა და Outlook-ში: ფინანსური ანგარიშგება და რუტინული ამოცანები."
       }
     ],
     "foot": "2.3 პოპულარული AI-პლატფორმები"
@@ -3576,7 +3419,61 @@ function Video({ s }) {
   );
 }
 
-const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks, video: Video };
+/* ---- Turing test visual ---- */
+function Turing({ s }) {
+  const Player = ({ p }) => (
+    <div className="t-player r" style={{ "--d": p.d }}>
+      <div className="t-head"><span className="t-tag">{p.tag}</span><span className="t-q">?</span></div>
+      <div className="t-bubble">{p.msg}</div>
+      <div className="t-reveal">{p.who}</div>
+    </div>
+  );
+  return (
+    <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
+      <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
+      <div className="turing">
+        <Player p={{ ...s.a, d: ".18s" }} />
+        <div className="t-judge r" style={{ "--d": ".26s" }}>
+          <div className="t-judge-badge">{s.judge || "მსაჯი"}</div>
+          <div className="t-judge-q">{s.judgeQ}</div>
+          <div className="t-vs">?</div>
+          <div className="t-verdict">{s.verdict}</div>
+        </div>
+        <Player p={{ ...s.b, d: ".34s" }} />
+      </div>
+    </div>
+  );
+}
+
+/* ---- process / architecture flow diagram ---- */
+function Flow({ s }) {
+  const Box = ({ b }) => (
+    <div className={"flow-box" + (b.accent ? " accent" : "")}>
+      <div className="fh">{b.h}</div>
+      {b.b && <div className="fb">{b.b}</div>}
+    </div>
+  );
+  return (
+    <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
+      <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
+      <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div className="flow">
+          {s.stages.map((st, i) => (
+            <React.Fragment key={i}>
+              <div className="flow-stage r" style={{ "--d": (0.16 + i * 0.1) + "s" }}>
+                {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
+              </div>
+              {i < s.stages.length - 1 && <div className="flow-arrow r" style={{ "--d": (0.2 + i * 0.1) + "s" }}>→</div>}
+            </React.Fragment>
+          ))}
+        </div>
+        {s.result && <div className="note-line r" style={{ "--d": ".5s" }}>{s.result}</div>}
+      </div>
+    </div>
+  );
+}
+
+const KINDS = { cover: Cover, trainer: Trainer, points: Points, stats: Stats, roadmap: Roadmap, section: Section, block: Block, agenda: Agenda, timeline: Timeline, bigstat: BigStat, def: Definition, twocol: TwoCol, model: Model, market: Market, steps: Steps, stepper: Stepper, prob: Prob, neural: Neural, tools: Tools, table: Table, chips: Chips, live: Live, risks: Risks, roi: Roi, statement: Statement, thanks: Thanks, video: Video, turing: Turing, flow: Flow };
 
 function Slide({ s, idx }) {
   const Body = KINDS[s.kind] || Points;
