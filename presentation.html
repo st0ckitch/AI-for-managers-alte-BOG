@@ -540,8 +540,8 @@ body::before {
 .flow-list { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
 .flow-list li { font-size: 12px; color: var(--ink-dim); line-height: 1.3; padding-left: 13px; position: relative; }
 .flow-list li::before { content: ''; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 999px; background: var(--accent); }
-.flow-arrow { font-size: 28px; color: var(--accent); flex: none; align-self: center; margin-top: 18px;
-  filter: drop-shadow(0 0 8px var(--accent-glow)); }
+.flow-conn { flex: none; width: 58px; height: 88px; align-self: center;
+  filter: drop-shadow(0 1px 4px var(--accent-glow)); }
 .flow-impact { margin-top: 24px; display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 14px;
   background: var(--accent-soft); border: 1px solid rgba(255,82,0,0.28); }
 .flow-impact-lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 999px;
@@ -2359,45 +2359,45 @@ window.DEFAULT_SLIDES = [
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · ᲛᲐᲠᲙᲔᲢᲘᲜᲒᲘ · ᲐᲠᲥᲘᲢᲔᲥᲢᲣᲠᲐ",
-    "title": "პერსონალური კამპანიის არქიტექტურა",
+    "eyebrow": "2.1 · MARKETING · ARCHITECTURE",
+    "title": "Personalized campaign architecture",
     "titleSize": "md",
-    "intro": "როგორ იქცევა BoG-ის მონაცემები პერსონალურ შეთავაზებად და როგორ უბრუნდება შედეგი AI-ს, რომ კამპანია მუდმივად გაუმჯობესდეს.",
+    "intro": "How BoG's data becomes a personalized offer - and how the results flow back to the AI so the campaign keeps improving.",
     "stages": [
       {
         "label": "DATA",
         "h": "BoG Big Data",
-        "b": "ტრანზაქციები, ქცევა და კლიენტის პროფილი."
+        "b": "Transactions, behaviour and customer profile."
       },
       {
         "label": "VIA API",
-        "h": "ML/AI Layer",
-        "b": "ქცევის ანალიზი: სეგმენტაცია, churn და CLV პროგნოზი."
+        "h": "ML / AI Layer",
+        "b": "Behaviour analysis: segmentation, churn and CLV prediction."
       },
       {
         "label": "GENERATE",
         "h": "Generative AI",
-        "b": "ქმნის პერსონალურ Email და SMS შეტყობინებებს თითო კლიენტისთვის."
+        "b": "Writes a personalized email and SMS for each customer."
       },
       {
         "label": "CHANNELS",
         "branch": [
           {
             "cond": "Email",
-            "h": "Email Provider",
-            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "h": "Email provider",
+            "b": "UTM tags + analytics built in.",
             "accent": true
           },
           {
             "cond": "SMS",
-            "h": "SMS Provider",
-            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "h": "SMS provider",
+            "b": "UTM tags + analytics built in.",
             "accent": true
           }
         ]
       }
     ],
-    "loop": "analytics (open rate, purchase rate, actions) უბრუნდება ML/AI შრეს: სისტემა სწავლობს და კამპანია მუდმივად უმჯობესდება.",
+    "loop": "Analytics (open rate, purchase rate, actions) flows back to the ML/AI layer - the system learns and the campaign keeps improving.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
@@ -2510,6 +2510,17 @@ window.DEFAULT_SLIDES = [
         "b": "AI-ვიდეოინტერვიუ: კანდიდატი კითხვებზე ვიდეოთი პასუხობს, AI აფასებს პასუხებსა და CV-ს და ახარისხებს საუკეთესოებს - რეკრუტერი დროს ზოგავს."
       }
     ],
+    "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
+  },
+  {
+    "kind": "video",
+    "eyebrow": "2.2 · HR · DEMO",
+    "title": "HireScreen - live demo",
+    "titleSize": "md",
+    "caption": "HireScreen - video demonstration",
+    "src": "https://drive.google.com/file/d/15EXmE9Oxe1YTI8tHu-nq6BksB8MfcDht/preview",
+    "linkLabel": "Open video ↗",
+    "note": "AI video interviews, CV screening and candidate scoring, shown end to end.",
     "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
   },
   {
@@ -3695,6 +3706,14 @@ function Flow({ s }) {
       {b.list && <ul className="flow-list">{b.list.map((x, j) => <li key={j}>{x}</li>)}</ul>}
     </div>
   );
+  // curvy dotted "journey" connector between stages (alternating up / down)
+  const Conn = ({ up, d }) => (
+    <svg className="flow-conn r" style={{ "--d": d }} width="58" height="88" viewBox="0 0 64 88" fill="none">
+      <path d={up ? "M3,44 C 22,14 42,14 60,44" : "M3,44 C 22,74 42,74 60,44"}
+            stroke="var(--accent)" strokeWidth="3" strokeDasharray="0.1 11" strokeLinecap="round" />
+      <path d="M52,39 L61,44 L52,49" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
   return (
     <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
       <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
@@ -3708,7 +3727,7 @@ function Flow({ s }) {
                   {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
                 </div>
               </div>
-              {i < s.stages.length - 1 && <div className="flow-arrow r" style={{ "--d": (0.2 + i * 0.1) + "s" }}>→</div>}
+              {i < s.stages.length - 1 && <Conn key={"c" + i} up={i % 2 === 0} d={(0.2 + i * 0.1) + "s"} />}
             </React.Fragment>
           ))}
         </div>

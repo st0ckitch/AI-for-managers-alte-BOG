@@ -1755,45 +1755,45 @@ window.DEFAULT_SLIDES = [
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · ᲛᲐᲠᲙᲔᲢᲘᲜᲒᲘ · ᲐᲠᲥᲘᲢᲔᲥᲢᲣᲠᲐ",
-    "title": "პერსონალური კამპანიის არქიტექტურა",
+    "eyebrow": "2.1 · MARKETING · ARCHITECTURE",
+    "title": "Personalized campaign architecture",
     "titleSize": "md",
-    "intro": "როგორ იქცევა BoG-ის მონაცემები პერსონალურ შეთავაზებად და როგორ უბრუნდება შედეგი AI-ს, რომ კამპანია მუდმივად გაუმჯობესდეს.",
+    "intro": "How BoG's data becomes a personalized offer - and how the results flow back to the AI so the campaign keeps improving.",
     "stages": [
       {
         "label": "DATA",
         "h": "BoG Big Data",
-        "b": "ტრანზაქციები, ქცევა და კლიენტის პროფილი."
+        "b": "Transactions, behaviour and customer profile."
       },
       {
         "label": "VIA API",
-        "h": "ML/AI Layer",
-        "b": "ქცევის ანალიზი: სეგმენტაცია, churn და CLV პროგნოზი."
+        "h": "ML / AI Layer",
+        "b": "Behaviour analysis: segmentation, churn and CLV prediction."
       },
       {
         "label": "GENERATE",
         "h": "Generative AI",
-        "b": "ქმნის პერსონალურ Email და SMS შეტყობინებებს თითო კლიენტისთვის."
+        "b": "Writes a personalized email and SMS for each customer."
       },
       {
         "label": "CHANNELS",
         "branch": [
           {
             "cond": "Email",
-            "h": "Email Provider",
-            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "h": "Email provider",
+            "b": "UTM tags + analytics built in.",
             "accent": true
           },
           {
             "cond": "SMS",
-            "h": "SMS Provider",
-            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "h": "SMS provider",
+            "b": "UTM tags + analytics built in.",
             "accent": true
           }
         ]
       }
     ],
-    "loop": "analytics (open rate, purchase rate, actions) უბრუნდება ML/AI შრეს: სისტემა სწავლობს და კამპანია მუდმივად უმჯობესდება.",
+    "loop": "Analytics (open rate, purchase rate, actions) flows back to the ML/AI layer - the system learns and the campaign keeps improving.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
@@ -1906,6 +1906,17 @@ window.DEFAULT_SLIDES = [
         "b": "AI-ვიდეოინტერვიუ: კანდიდატი კითხვებზე ვიდეოთი პასუხობს, AI აფასებს პასუხებსა და CV-ს და ახარისხებს საუკეთესოებს - რეკრუტერი დროს ზოგავს."
       }
     ],
+    "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
+  },
+  {
+    "kind": "video",
+    "eyebrow": "2.2 · HR · DEMO",
+    "title": "HireScreen - live demo",
+    "titleSize": "md",
+    "caption": "HireScreen - video demonstration",
+    "src": "https://drive.google.com/file/d/15EXmE9Oxe1YTI8tHu-nq6BksB8MfcDht/preview",
+    "linkLabel": "Open video ↗",
+    "note": "AI video interviews, CV screening and candidate scoring, shown end to end.",
     "foot": "2.2 AI არასაბანკო ინდუსტრიებში"
   },
   {

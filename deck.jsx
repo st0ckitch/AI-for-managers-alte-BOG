@@ -653,6 +653,14 @@ function Flow({ s }) {
       {b.list && <ul className="flow-list">{b.list.map((x, j) => <li key={j}>{x}</li>)}</ul>}
     </div>
   );
+  // curvy dotted "journey" connector between stages (alternating up / down)
+  const Conn = ({ up, d }) => (
+    <svg className="flow-conn r" style={{ "--d": d }} width="58" height="88" viewBox="0 0 64 88" fill="none">
+      <path d={up ? "M3,44 C 22,14 42,14 60,44" : "M3,44 C 22,74 42,74 60,44"}
+            stroke="var(--accent)" strokeWidth="3" strokeDasharray="0.1 11" strokeLinecap="round" />
+      <path d="M52,39 L61,44 L52,49" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
   return (
     <div className="slide-body" style={{ display: "flex", flexDirection: "column" }}>
       <Header s={{ eyebrow: s.eyebrow, title: s.title, titleSize: s.titleSize || "md", intro: s.intro }} />
@@ -666,7 +674,7 @@ function Flow({ s }) {
                   {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
                 </div>
               </div>
-              {i < s.stages.length - 1 && <div className="flow-arrow r" style={{ "--d": (0.2 + i * 0.1) + "s" }}>→</div>}
+              {i < s.stages.length - 1 && <Conn key={"c" + i} up={i % 2 === 0} d={(0.2 + i * 0.1) + "s"} />}
             </React.Fragment>
           ))}
         </div>
