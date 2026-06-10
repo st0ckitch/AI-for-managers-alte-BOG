@@ -511,15 +511,26 @@ body::before {
 .t-verdict { font-size: 15px; color: var(--ink-dim); max-width: 26ch; line-height: 1.45; }
 
 /* ---------- FLOW DIAGRAM ---------- */
-.flow { display: flex; align-items: center; justify-content: center; gap: 8px; }
-.flow-stage { display: flex; flex-direction: column; gap: 12px; flex: 1; max-width: 300px; }
-.flow-box { padding: 18px 18px; border-radius: 14px; border: 1px solid var(--line);
+.flow { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.flow-stage { display: flex; flex-direction: column; flex: 1; max-width: 320px; }
+.flow-stage-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 9px; text-align: center; }
+.flow-stack { display: flex; flex-direction: column; gap: 12px; }
+.flow-box { padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line);
   background: linear-gradient(180deg, var(--bg-2), var(--bg-3)); position: relative; }
-.flow-box.accent { border-color: rgba(255,82,0,0.4); background: var(--grad-soft); }
-.flow-box .fh { font-family: var(--font-display); font-weight: 600; font-size: 16px; color: var(--ink); letter-spacing: -0.01em; }
+.flow-box.accent { border-color: rgba(255,82,0,0.42); background: var(--grad-soft); }
+.flow-cond { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent-text); margin-bottom: 7px; }
+.flow-box .fh { font-family: var(--font-display); font-weight: 600; font-size: 16.5px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
 .flow-box.accent .fh { color: var(--bog-light); }
-.flow-box .fb { font-size: 12.5px; color: var(--ink-dim); margin-top: 6px; line-height: 1.4; }
-.flow-arrow { font-size: 30px; color: var(--accent); flex: none; filter: drop-shadow(0 0 8px var(--accent-glow)); }
+.flow-box .fb { font-size: 13px; color: var(--ink-dim); margin-top: 7px; line-height: 1.45; }
+.flow-arrow { font-size: 28px; color: var(--accent); flex: none; align-self: center; margin-top: 18px;
+  filter: drop-shadow(0 0 8px var(--accent-glow)); }
+.flow-impact { margin-top: 24px; display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 14px;
+  background: var(--accent-soft); border: 1px solid rgba(255,82,0,0.28); }
+.flow-impact-lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 999px;
+  background: var(--grad); color: #fff; flex: none; }
+.flow-impact-txt { font-size: 15.5px; color: var(--ink); line-height: 1.4; }
 
 /* ---------- VIDEO ---------- */
 .video-frame {

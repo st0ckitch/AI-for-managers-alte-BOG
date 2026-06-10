@@ -647,6 +647,7 @@ function Turing({ s }) {
 function Flow({ s }) {
   const Box = ({ b }) => (
     <div className={"flow-box" + (b.accent ? " accent" : "")}>
+      {b.cond && <div className="flow-cond">{b.cond}</div>}
       <div className="fh">{b.h}</div>
       {b.b && <div className="fb">{b.b}</div>}
     </div>
@@ -659,13 +660,21 @@ function Flow({ s }) {
           {s.stages.map((st, i) => (
             <React.Fragment key={i}>
               <div className="flow-stage r" style={{ "--d": (0.16 + i * 0.1) + "s" }}>
-                {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
+                {st.label && <div className="flow-stage-label">{st.label}</div>}
+                <div className="flow-stack">
+                  {st.branch ? st.branch.map((b, j) => <Box key={j} b={b} />) : <Box b={st} />}
+                </div>
               </div>
               {i < s.stages.length - 1 && <div className="flow-arrow r" style={{ "--d": (0.2 + i * 0.1) + "s" }}>→</div>}
             </React.Fragment>
           ))}
         </div>
-        {s.result && <div className="note-line r" style={{ "--d": ".5s" }}>{s.result}</div>}
+        {s.result && (
+          <div className="flow-impact r" style={{ "--d": ".5s" }}>
+            <span className="flow-impact-lab">{s.resultLabel || "IMPACT"}</span>
+            <span className="flow-impact-txt">{s.result}</span>
+          </div>
+        )}
       </div>
     </div>
   );

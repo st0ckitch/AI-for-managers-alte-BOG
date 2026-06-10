@@ -1424,130 +1424,154 @@ window.DEFAULT_SLIDES = [
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 1",
-    "title": "AI თაღლითობის აღმოჩენა",
+    "eyebrow": "2.1 · REVOLUT · CASE 1",
+    "title": "AI scam detection",
     "titleSize": "md",
-    "intro": "ML აფასებს თითო ბარათის გადახდას და საეჭვოს აჩერებს, სანამ ფული გავა.",
+    "intro": "Every card payment is scored in real time by a machine-learning model for the likelihood it is part of an Authorised Push Payment (APP) scam - where the victim is tricked into approving the payment themselves. Risky payments are paused before the money leaves the account.",
     "stages": [
       {
-        "h": "ბარათით გადახდა",
-        "b": "შემოდის ტრანზაქცია"
+        "label": "Step 1",
+        "h": "Card payment",
+        "b": "The customer initiates a card payment."
       },
       {
-        "h": "ML სქორინგი",
-        "b": "ითვლება თაღლითობის ალბათობა თითო გადახდაზე"
+        "label": "Step 2",
+        "h": "Real-time ML scoring",
+        "b": "A model trained on past scam patterns assigns a fraud probability to this exact payment."
       },
       {
+        "label": "Decision",
         "branch": [
           {
-            "h": "საეჭვო → ჩარევის ნაკადი",
-            "b": "გადახდა ჩერდება, მომხმარებელი იღებს გაფრთხილებას და სპეციალისტთან წვდომას",
+            "cond": "If suspicious",
+            "h": "Intervention flow",
+            "b": "Payment is held; the app shows warnings and educational prompts, then connects the user to a fraud specialist.",
             "accent": true
           },
           {
-            "h": "სუფთა → დაშვება",
-            "b": "გადახდა ნორმალურად სრულდება"
+            "cond": "If clean",
+            "h": "Payment proceeds",
+            "b": "Low-risk payments simply go through."
           }
         ]
       }
     ],
-    "result": "შედეგი: საინვესტიციო თაღლითობით გამოწვეული ზარალი 30%-ით შემცირდა.",
+    "resultLabel": "IMPACT",
+    "result": "30% reduction in fraud losses from investment-type card scams.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 2",
-    "title": "ზარის რეალურ დროში იდენტიფიკაცია",
+    "eyebrow": "2.1 · REVOLUT · CASE 2",
+    "title": "Real-time call identification",
     "titleSize": "md",
-    "intro": "2026 წლის ფუნქცია - კონტრზომა AI-ხმით თაღლითობის წინააღმდეგ.",
+    "intro": "A January 2026 countermeasure to impersonation (“vishing”) scams that increasingly use AI-cloned voices. When you open the app during a phone call, Revolut tells you whether a caller claiming to be Revolut is genuine.",
     "stages": [
       {
-        "h": "მომხმარებელი ხსნის აპს",
-        "b": "სატელეფონო ზარის მიმდინარეობისას"
+        "label": "Step 1",
+        "h": "Customer is on a call",
+        "b": "A caller claims: “I'm calling from Revolut.”"
       },
       {
-        "h": "აპი ამოიცნობს ზარს",
-        "b": "ხვდება, რომ მომხმარებელი ახლა ზარშია"
+        "label": "Step 2",
+        "h": "App detects the live call",
+        "b": "On opening, the app detects that the customer is currently on a phone call."
       },
       {
+        "label": "Verdict",
         "branch": [
           {
-            "h": "დამრეკავი ამბობს „Revolut ვარ“",
-            "b": "აპი აჩვენებს ბანერს: ნამდვილად Revolut-ია თუ არა",
+            "cond": "Genuine",
+            "h": "Banner: real Revolut call",
+            "b": "The app confirms the call is genuinely from Revolut.",
             "accent": true
           },
           {
-            "h": "ნამდვილი ზარი",
-            "b": "ბანერი ადასტურებს, რომ ზარი ნამდვილია"
+            "cond": "Fake",
+            "h": "Banner: not from Revolut",
+            "b": "The app warns that Revolut is not calling - likely a scam."
           }
         ]
       }
     ],
-    "result": "შედეგი: პირდაპირი დაცვა AI-ხმით იმიტირებული თაღლითობისგან.",
+    "resultLabel": "WHY IT MATTERS",
+    "result": "A direct defense against AI-voice impersonation of bank staff.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 3",
-    "title": "ტრანზაქციების მონიტორინგი მასშტაბურად",
+    "eyebrow": "2.1 · REVOLUT · CASE 3",
+    "title": "Transaction monitoring at scale",
     "titleSize": "md",
-    "intro": "AI და ადამიანი ერთად - „human-in-the-loop“ იქ, სადაც მსჯელობა საჭიროა.",
+    "intro": "Revolut screens millions of transactions for financial crime. The work is split by risk: AI handles the high-volume, lower-complexity layer, while human investigators take the cases that need judgment. Their U.S. CEO said the AI now outperforms human reviewers.",
     "stages": [
       {
-        "h": "ტრანზაქციები",
-        "b": "მილიონობით ოპერაცია რეალურ დროში"
+        "label": "Step 1",
+        "h": "Millions of transactions",
+        "b": "A continuous stream of payments and transfers."
       },
       {
-        "h": "AI რისკის შეფასება",
-        "b": "სისტემა ანაწილებს რისკის დონის მიხედვით"
+        "label": "Step 2",
+        "h": "AI risk triage",
+        "b": "Each transaction is scored and routed by risk and complexity."
       },
       {
+        "label": "Routing",
         "branch": [
           {
-            "h": "დიდი მოცულობა, დაბალი სირთულე → AI",
-            "b": "AI თავად ამუშავებს სკრინინგის შრეს"
+            "cond": "High volume · low complexity",
+            "h": "AI auto-screens",
+            "b": "The model clears the bulk of routine screening on its own."
           },
           {
-            "h": "რთული ქეისი → ადამიანი",
-            "b": "გამომძიებელი იღებს მსჯელობის მომთხოვ შემთხვევებს",
+            "cond": "Needs judgment",
+            "h": "Human investigator",
+            "b": "Complex, judgment-heavy cases go to a specialist.",
             "accent": true
           }
         ]
       }
     ],
-    "result": "Revolut-ის თქმით, AI ფინანსური დანაშაულის აღმოჩენაში უკვე აჯობებს ადამიან-რევიუერებს.",
+    "resultLabel": "PATTERN",
+    "result": "AI outperforms human reviewers; people focus only where judgment counts (human-in-the-loop).",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
     "kind": "flow",
-    "eyebrow": "2.1 · Revolut · ᲥᲔᲘᲡᲘ 4",
-    "title": "გენერაციული AI Google Cloud-ით",
+    "eyebrow": "2.1 · REVOLUT · CASE 4",
+    "title": "Generative AI via Google Cloud",
     "titleSize": "md",
-    "intro": "Revolut-მა Gemini მოდელები ჩართო თაღლითობასა და პროდუქტში.",
+    "intro": "Revolut expanded its Google Cloud partnership to embed Google's Gemini models into both fraud detection and product development, as it scales toward 100 million customers.",
     "stages": [
       {
-        "h": "Revolut + Google Cloud",
-        "b": "გაფართოებული პარტნიორობა"
+        "label": "Step 1",
+        "h": "Revolut × Google Cloud",
+        "b": "An expanded cloud and AI partnership."
       },
       {
-        "h": "Gemini მოდელები",
-        "b": "გენერაციული AI ეკოსისტემაში"
+        "label": "Step 2",
+        "h": "Gemini models integrated",
+        "b": "Generative-AI models are plugged into Revolut's stack."
       },
       {
+        "label": "Applied to",
         "branch": [
           {
-            "h": "თაღლითობის აღმოჩენა",
-            "b": "AI-ით გაძლიერებული დაცვა",
+            "cond": "Security",
+            "h": "Fraud detection",
+            "b": "Generative AI strengthens scam and crime detection.",
             "accent": true
           },
           {
-            "h": "პროდუქტის განვითარება",
-            "b": "ახალი ფუნქციები და გამოცდილება"
+            "cond": "Growth",
+            "h": "Product development",
+            "b": "New features and customer experiences."
           }
         ]
       }
     ],
-    "result": "მიზანი: 100 მილიონი მომხმარებელი.",
+    "resultLabel": "GOAL",
+    "result": "Scaling toward 100 million customers.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
