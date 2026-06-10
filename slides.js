@@ -1754,6 +1754,49 @@ window.DEFAULT_SLIDES = [
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
+    "kind": "flow",
+    "eyebrow": "2.1 · ᲛᲐᲠᲙᲔᲢᲘᲜᲒᲘ · ᲐᲠᲥᲘᲢᲔᲥᲢᲣᲠᲐ",
+    "title": "პერსონალური კამპანიის არქიტექტურა",
+    "titleSize": "md",
+    "intro": "როგორ იქცევა BoG-ის მონაცემები პერსონალურ შეთავაზებად და როგორ უბრუნდება შედეგი AI-ს, რომ კამპანია მუდმივად გაუმჯობესდეს.",
+    "stages": [
+      {
+        "label": "DATA",
+        "h": "BoG Big Data",
+        "b": "ტრანზაქციები, ქცევა და კლიენტის პროფილი."
+      },
+      {
+        "label": "VIA API",
+        "h": "ML/AI Layer",
+        "b": "ქცევის ანალიზი: სეგმენტაცია, churn და CLV პროგნოზი."
+      },
+      {
+        "label": "GENERATE",
+        "h": "Generative AI",
+        "b": "ქმნის პერსონალურ Email და SMS შეტყობინებებს თითო კლიენტისთვის."
+      },
+      {
+        "label": "CHANNELS",
+        "branch": [
+          {
+            "cond": "Email",
+            "h": "Email Provider",
+            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "accent": true
+          },
+          {
+            "cond": "SMS",
+            "h": "SMS Provider",
+            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "accent": true
+          }
+        ]
+      }
+    ],
+    "loop": "analytics (open rate, purchase rate, actions) უბრუნდება ML/AI შრეს: სისტემა სწავლობს და კამპანია მუდმივად უმჯობესდება.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
     "kind": "block",
     "num": "2.2",
     "titleLines": [

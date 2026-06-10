@@ -547,6 +547,11 @@ body::before {
 .flow-impact-lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 999px;
   background: var(--grad); color: #fff; flex: none; }
 .flow-impact-txt { font-size: 15.5px; color: var(--ink); line-height: 1.4; }
+.flow-loop { margin-top: 16px; display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 12px;
+  border: 1px dashed rgba(255,82,0,0.5); background: rgba(255,82,0,0.04); }
+.flow-loop-ar { font-size: 24px; color: var(--accent); flex: none; line-height: 1; }
+.flow-loop-txt { font-size: 14px; color: var(--ink-dim); line-height: 1.4; }
+.flow-loop-txt b { color: var(--accent-text); }
 
 /* ---------- VIDEO ---------- */
 .video-frame {
@@ -2353,6 +2358,49 @@ window.DEFAULT_SLIDES = [
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
+    "kind": "flow",
+    "eyebrow": "2.1 · ᲛᲐᲠᲙᲔᲢᲘᲜᲒᲘ · ᲐᲠᲥᲘᲢᲔᲥᲢᲣᲠᲐ",
+    "title": "პერსონალური კამპანიის არქიტექტურა",
+    "titleSize": "md",
+    "intro": "როგორ იქცევა BoG-ის მონაცემები პერსონალურ შეთავაზებად და როგორ უბრუნდება შედეგი AI-ს, რომ კამპანია მუდმივად გაუმჯობესდეს.",
+    "stages": [
+      {
+        "label": "DATA",
+        "h": "BoG Big Data",
+        "b": "ტრანზაქციები, ქცევა და კლიენტის პროფილი."
+      },
+      {
+        "label": "VIA API",
+        "h": "ML/AI Layer",
+        "b": "ქცევის ანალიზი: სეგმენტაცია, churn და CLV პროგნოზი."
+      },
+      {
+        "label": "GENERATE",
+        "h": "Generative AI",
+        "b": "ქმნის პერსონალურ Email და SMS შეტყობინებებს თითო კლიენტისთვის."
+      },
+      {
+        "label": "CHANNELS",
+        "branch": [
+          {
+            "cond": "Email",
+            "h": "Email Provider",
+            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "accent": true
+          },
+          {
+            "cond": "SMS",
+            "h": "SMS Provider",
+            "b": "UTM და ანალიტიკა ჩაშენებული.",
+            "accent": true
+          }
+        ]
+      }
+    ],
+    "loop": "analytics (open rate, purchase rate, actions) უბრუნდება ML/AI შრეს: სისტემა სწავლობს და კამპანია მუდმივად უმჯობესდება.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
     "kind": "block",
     "num": "2.2",
     "titleLines": [
@@ -3664,8 +3712,14 @@ function Flow({ s }) {
             </React.Fragment>
           ))}
         </div>
+        {s.loop && (
+          <div className="flow-loop r" style={{ "--d": ".5s" }}>
+            <span className="flow-loop-ar">↺</span>
+            <span className="flow-loop-txt">{s.loop}</span>
+          </div>
+        )}
         {s.result && (
-          <div className="flow-impact r" style={{ "--d": ".5s" }}>
+          <div className="flow-impact r" style={{ "--d": ".56s" }}>
             <span className="flow-impact-lab">{s.resultLabel || "IMPACT"}</span>
             <span className="flow-impact-txt">{s.result}</span>
           </div>

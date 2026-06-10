@@ -670,8 +670,14 @@ function Flow({ s }) {
             </React.Fragment>
           ))}
         </div>
+        {s.loop && (
+          <div className="flow-loop r" style={{ "--d": ".5s" }}>
+            <span className="flow-loop-ar">↺</span>
+            <span className="flow-loop-txt">{s.loop}</span>
+          </div>
+        )}
         {s.result && (
-          <div className="flow-impact r" style={{ "--d": ".5s" }}>
+          <div className="flow-impact r" style={{ "--d": ".56s" }}>
             <span className="flow-impact-lab">{s.resultLabel || "IMPACT"}</span>
             <span className="flow-impact-txt">{s.result}</span>
           </div>

@@ -534,6 +534,11 @@ body::before {
 .flow-impact-lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 999px;
   background: var(--grad); color: #fff; flex: none; }
 .flow-impact-txt { font-size: 15.5px; color: var(--ink); line-height: 1.4; }
+.flow-loop { margin-top: 16px; display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 12px;
+  border: 1px dashed rgba(255,82,0,0.5); background: rgba(255,82,0,0.04); }
+.flow-loop-ar { font-size: 24px; color: var(--accent); flex: none; line-height: 1; }
+.flow-loop-txt { font-size: 14px; color: var(--ink-dim); line-height: 1.4; }
+.flow-loop-txt b { color: var(--accent-text); }
 
 /* ---------- VIDEO ---------- */
 .video-frame {
