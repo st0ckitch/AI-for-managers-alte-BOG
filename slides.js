@@ -1462,6 +1462,56 @@ window.DEFAULT_SLIDES = [
   },
   {
     "kind": "flow",
+    "eyebrow": "2.1 · REVOLUT · CASE 1 · DEEP DIVE",
+    "title": "Inside the risk engine",
+    "titleSize": "md",
+    "intro": "For every payment the model turns dozens of signals into one fraud-probability score, then chooses how much friction to add - allow, warn, or hold.",
+    "stages": [
+      {
+        "label": "Inputs",
+        "h": "Signals it reads",
+        "list": [
+          "Amount & velocity",
+          "New / first-time payee",
+          "Merchant & category risk",
+          "Device & session",
+          "Behaviour vs. your norm",
+          "Known scam patterns"
+        ]
+      },
+      {
+        "label": "Model",
+        "h": "ML risk score",
+        "b": "A supervised model trained on past labelled scams. Output: a 0-100 fraud probability for this payment."
+      },
+      {
+        "label": "Policy",
+        "branch": [
+          {
+            "cond": "Low score",
+            "h": "Allow",
+            "b": "Goes straight through."
+          },
+          {
+            "cond": "Medium",
+            "h": "Add friction",
+            "b": "Extra confirmation + a tailored warning."
+          },
+          {
+            "cond": "High score",
+            "h": "Hold + intervene",
+            "b": "Pause, educate, route to a fraud specialist.",
+            "accent": true
+          }
+        ]
+      }
+    ],
+    "resultLabel": "FEEDBACK LOOP",
+    "result": "Confirmed fraud / no-fraud outcomes are fed back to retrain the model, so detection keeps improving.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
+    "kind": "flow",
     "eyebrow": "2.1 · REVOLUT · CASE 2",
     "title": "Real-time call identification",
     "titleSize": "md",
@@ -1496,6 +1546,44 @@ window.DEFAULT_SLIDES = [
     ],
     "resultLabel": "WHY IT MATTERS",
     "result": "A direct defense against AI-voice impersonation of bank staff.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
+    "kind": "flow",
+    "eyebrow": "2.1 · REVOLUT · CASE 2 · DEEP DIVE",
+    "title": "How the call check works",
+    "titleSize": "md",
+    "intro": "It combines a signal on your phone (you are on a call) with a check on Revolut's servers (are we actually calling you right now?).",
+    "stages": [
+      {
+        "label": "On device",
+        "h": "On-device signal",
+        "b": "When you open the app it reads the phone's call state - you are currently on a call."
+      },
+      {
+        "label": "On server",
+        "h": "Server cross-check",
+        "b": "Revolut checks its own systems: is there a genuine agent call to this customer at this moment?"
+      },
+      {
+        "label": "Result",
+        "branch": [
+          {
+            "cond": "Match",
+            "h": "Green banner",
+            "b": "Confirmed - it really is Revolut.",
+            "accent": true
+          },
+          {
+            "cond": "No match",
+            "h": "Warning banner",
+            "b": "Revolut is not calling you - likely a scam."
+          }
+        ]
+      }
+    ],
+    "resultLabel": "WHY IT WORKS",
+    "result": "Caller ID can be spoofed and voices cloned - the app gives the customer an independent source of truth.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {
@@ -1538,6 +1626,34 @@ window.DEFAULT_SLIDES = [
   },
   {
     "kind": "flow",
+    "eyebrow": "2.1 · REVOLUT · CASE 3 · DEEP DIVE",
+    "title": "Risk-tiering architecture",
+    "titleSize": "md",
+    "intro": "Monitoring is layered so attention scales with risk. Almost everything is cleared automatically; only a thin slice ever reaches people.",
+    "stages": [
+      {
+        "label": "~100% of volume",
+        "h": "AI screening",
+        "b": "Every transaction scored in real time against crime patterns."
+      },
+      {
+        "label": "Flagged only",
+        "h": "AI alerts",
+        "b": "A small fraction is escalated as suspicious."
+      },
+      {
+        "label": "Tiny slice",
+        "h": "Human investigators",
+        "b": "Judgment-heavy cases get expert review and a final decision.",
+        "accent": true
+      }
+    ],
+    "resultLabel": "PRINCIPLE",
+    "result": "Breadth from AI, depth from humans - precision exactly where mistakes are costly.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
+    "kind": "flow",
     "eyebrow": "2.1 · REVOLUT · CASE 4",
     "title": "Generative AI via Google Cloud",
     "titleSize": "md",
@@ -1572,6 +1688,44 @@ window.DEFAULT_SLIDES = [
     ],
     "resultLabel": "GOAL",
     "result": "Scaling toward 100 million customers.",
+    "foot": "2.1 AI საბანკო ინდუსტრიაში"
+  },
+  {
+    "kind": "flow",
+    "eyebrow": "2.1 · REVOLUT · CASE 4 · DEEP DIVE",
+    "title": "Where Gemini plugs in",
+    "titleSize": "md",
+    "intro": "Gemini is integrated via Google Cloud as a capability layer, not a single feature. Classic ML still flags risk; generative AI adds reasoning and language on top.",
+    "stages": [
+      {
+        "label": "Platform",
+        "h": "Google Cloud (Vertex AI)",
+        "b": "Hosting plus access to Google's foundation models."
+      },
+      {
+        "label": "Models",
+        "h": "Gemini family",
+        "b": "Multimodal generative-AI models."
+      },
+      {
+        "label": "Applied to",
+        "branch": [
+          {
+            "cond": "Security",
+            "h": "Fraud detection",
+            "b": "Reasons over patterns and explains anomalies alongside ML scoring.",
+            "accent": true
+          },
+          {
+            "cond": "Product",
+            "h": "Product & support",
+            "b": "Chat, assistance and personalization."
+          }
+        ]
+      }
+    ],
+    "resultLabel": "IN SHORT",
+    "result": "Classic ML flags it; generative AI helps explain it and act on it.",
     "foot": "2.1 AI საბანკო ინდუსტრიაში"
   },
   {

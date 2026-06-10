@@ -650,6 +650,7 @@ function Flow({ s }) {
       {b.cond && <div className="flow-cond">{b.cond}</div>}
       <div className="fh">{b.h}</div>
       {b.b && <div className="fb">{b.b}</div>}
+      {b.list && <ul className="flow-list">{b.list.map((x, j) => <li key={j}>{x}</li>)}</ul>}
     </div>
   );
   return (

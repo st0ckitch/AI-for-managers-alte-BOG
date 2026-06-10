@@ -524,6 +524,9 @@ body::before {
 .flow-box .fh { font-family: var(--font-display); font-weight: 600; font-size: 16.5px; color: var(--ink); letter-spacing: -0.01em; line-height: 1.1; }
 .flow-box.accent .fh { color: var(--bog-light); }
 .flow-box .fb { font-size: 13px; color: var(--ink-dim); margin-top: 7px; line-height: 1.45; }
+.flow-list { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.flow-list li { font-size: 12px; color: var(--ink-dim); line-height: 1.3; padding-left: 13px; position: relative; }
+.flow-list li::before { content: ''; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 999px; background: var(--accent); }
 .flow-arrow { font-size: 28px; color: var(--accent); flex: none; align-self: center; margin-top: 18px;
   filter: drop-shadow(0 0 8px var(--accent-glow)); }
 .flow-impact { margin-top: 24px; display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 14px;
